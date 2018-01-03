@@ -10,3 +10,5 @@ Each Campground has:
 		{name: "Salmon Creek", image: "http://www.image.com"}
 
 	]
+
+*Used the Git Bash commands to set up my Linux box to push changes to Github.
