@@ -21,7 +21,8 @@ adding more material to see if it shows up.
 #Creating new campgrounds
 *set up new campground post route
 *add in body-parser 
-*setup route to show form
+*setup route to show form and added some text
+*and some more
 *add basic unstyled form
 
 #style the campgrounds page
