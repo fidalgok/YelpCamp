@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var campgrounds = [
 		{
-			name: "Salmon Creek", image: "https://images.unsplash.com/photo-1508873696983-2dfd5898f08b"
+			name: "Salmon Path", image: "https://images.unsplash.com/photo-1508873696983-2dfd5898f08b"
 		},
 		{
 			name: "Yodel Mountain", image: "https://images.unsplash.com/photo-1484960055659-a39d25adcb3c"
