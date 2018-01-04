@@ -32,3 +32,8 @@ adding more material to see if it shows up.
 #style the navbar and form
 * Add a navbar to all templates
 *style the new campground form
+
+#YelpCamp v2
+*Install and configure Mongoose
+*Setup Campground Model
+*Use the model inside of our routes
