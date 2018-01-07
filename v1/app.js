@@ -6,9 +6,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
 var campgrounds = [
-		{
-			name: "Salmon Path", image: "https://images.unsplash.com/photo-1508873696983-2dfd5898f08b"
-		},
+		
 		{
 			name: "Yodel Mountain", image: "https://images.unsplash.com/photo-1484960055659-a39d25adcb3c"
 		},
