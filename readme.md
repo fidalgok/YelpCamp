@@ -79,3 +79,21 @@ aid in testing.
 * display comments on the campground show page
 
 
+# YelpCamp v4
+
+RESTful ROUTES
+name 	URL 			Verb 	description
+=======================================================
+NEW 	campgrounds/:id/comments/new GET
+CREATE 	campgrounds/:id/comments 	 POST
+
+## New Routes
+* Discuss nested routes
+	* Nest the routes as seen in the table above
+* Add the comment new and create routes
+* add the new comment form
+
+
+
+
+
