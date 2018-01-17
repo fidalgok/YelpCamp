@@ -2,9 +2,13 @@ var express = require('express'),
 	app = express(),
 	bodyParser = require('body-parser'),
 	mongoose = require('mongoose'),
+	passport = require('passport'),
+	LocalStrategy = require('passport-local'),
 	Campground = require('./models/campground'),
 	Comment = require('./models/comment'),
+	User = require('./models/user'),
 	seedDB = require('./seeds');
+
 
 //Delete all data, then seed database with new info.
 seedDB();
@@ -15,6 +19,22 @@ app.set("view engine", "ejs");
 //lives __dirname points to ~/Documents/webdev/yelpcamp etc all the way to this
 //path so that we can point to the correct location of folders to use.
 app.use(express.static(__dirname + "/public"));
+
+/*
+	configure Passport
+*/
+
+app.use(require('express-session')({
+	secret:"space cat",
+	resave: false,
+	saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 
 
@@ -124,6 +144,34 @@ app.post("/campgrounds/:id/comments", function(req, res){
 
 	
 });
+
+/**************************
+
+User Auth Routes
+
+**************************/
+
+//show register form
+app.get('/register', function(req, res){
+	res.render("register");
+});
+
+//signup logic
+app.post("/register", function(req, res){
+	User.register(new User({username: req.body.username}), req.body.password, function(err, user){
+		if(err){
+			console.log("User registration error:" + err);
+			return res.render('register');
+		}
+		//once user has signed up, log them in with authenticate
+		//and redirect to the campgrounds page
+		passport.authenticate('local')(req, res, function(){
+			res.redirect('/campgrounds');
+		});
+
+	})
+});
+
 
 //listener
 
