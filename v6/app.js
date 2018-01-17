@@ -35,13 +35,24 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+/*
+	rather than passing req.user to every route manually we can
+	write our own middleware. app.use will use it on every route we
+	create so we can access our user throughout the site
+*/
 
+app.use(function(req, res, next){
+	//whatever we put inside of res.locals is what's 
+	//available inside of our template
+	res.locals.currentUser = req.user;
+	next();
+});
 
 
 //routes
 
 app.get("/", function(req, res){
-	res.render("landing");
+	res.render("landing", {currentUser : req.user});
 });
 
 //Index Route, Display list of all campgrounds
@@ -51,7 +62,10 @@ app.get("/campgrounds", function(req, res){
 		if(err){
 			console.log(err);
 		} else{
-			res.render("campgrounds/index", {campgrounds : allCampgrounds});
+			res.render("campgrounds/index", {
+				campgrounds : allCampgrounds,
+				currentUser : req.user //username and id of logged in user
+			});
 		}
 	});
 	
@@ -76,7 +90,7 @@ app.post("/campgrounds", function(req, res){
 			console.log(err);
 		}else{
 			console.log("campground created!");
-			console.log(campground);
+			//console.log(campground);
 			//redirect back to campgrounds page
 			res.redirect("/campgrounds");
 		}
@@ -92,7 +106,7 @@ app.get("/campgrounds/:id", function(req, res){
 			console.log(err);
 		}else{
 			//render the show template
-			console.log(foundCampground);
+			//console.log(foundCampground);
 			res.render("campgrounds/show", {campground: foundCampground});
 		}
 	});
@@ -102,7 +116,7 @@ app.get("/campgrounds/:id", function(req, res){
 //Comments routes
 //=============
 
-app.get("/campgrounds/:id/comments/new", function(req, res){
+app.get("/campgrounds/:id/comments/new", isLoggedIn ,function(req, res){
 	//find campground by id
 	Campground.findById(req.params.id, function(err, campground){
 		if(err){
@@ -115,7 +129,7 @@ app.get("/campgrounds/:id/comments/new", function(req, res){
 });
 
 //Comments Post route
-app.post("/campgrounds/:id/comments", function(req, res){
+app.post("/campgrounds/:id/comments", isLoggedIn,function(req, res){
 	//Find Campground
 	//create new post, on success reference it within the campground
 	Campground.findById(req.params.id, function(err, campground){
@@ -171,6 +185,36 @@ app.post("/register", function(req, res){
 
 	})
 });
+
+//show login form
+
+app.get("/login", function(req, res){
+	res.render("login");
+});
+
+//login logic
+
+app.post("/login", passport.authenticate("local", 
+	{
+		successRedirect: "/campgrounds",
+		failureRedirect: "/login"
+	}), function(req, res){
+
+});
+
+//logout route
+app.get("/logout", function(req, res){
+	req.logout();
+	res.redirect("/campgrounds");
+});
+
+//setup our own middleware to check whether users are logged in
+function isLoggedIn(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	}
+	res.redirect("/login");
+}
 
 
 //listener
