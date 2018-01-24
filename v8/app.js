@@ -15,7 +15,7 @@ var commentRoutes = require('./routes/comments'),
 
 
 //Delete all data, then seed database with new info.
-seedDB();
+//seedDB(); // seed database
 mongoose.connect("mongodb://localhost/YelpCamp");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");

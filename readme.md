@@ -94,6 +94,14 @@ CREATE 	campgrounds/:id/comments 	 POST
 * add the new comment form
 
 
+# YelpCamp v5
 
+Continue styling the show page
+
+# YelpCamp v6
+
+* Add User Model
+* Install all packages needed for auth
+* define user model
 
 

@@ -19,7 +19,7 @@ router.get("/new", isLoggedIn ,function(req, res){
 	
 });
 
-//Comments Post route
+//Comments Create Post route
 router.post("/", isLoggedIn,function(req, res){
 	//Find Campground
 	//create new post, on success reference it within the campground
@@ -34,7 +34,12 @@ router.post("/", isLoggedIn,function(req, res){
 							console.log("error from comment create post route")
 							console.log(err);
 						} else {
-					
+							//add username and id to comment
+							comment.author.id = req.user._id;
+							comment.author.username = req.user.username;
+							//save comment
+							
+							comment.save();
 							campground.comments.push(comment._id);
 							campground.save();
 							res.redirect("/campgrounds/" + campground._id);
