@@ -52,6 +52,22 @@ router.post("/", isLoggedIn,function(req, res){
 			});
 });
 
+/********************************
+	Comments Edit Routes
+********************************/
+
+router.get("/:id/edit", function(req, res){
+	//get the comment by it's id
+	Comment.findById(req.params.id, function(err, comment){
+		res.render("comments/edit", {comment: comment});
+	});
+	
+});
+
+router.put("/:id", function(req, res){
+	res.send("trying to update a comment");
+});
+
 function isLoggedIn(req, res, next){
 	if(req.isAuthenticated()){
 		return next();
