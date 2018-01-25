@@ -116,7 +116,8 @@ Each Campground has:
 * Add Update route
 
 Campground Edit Route: <!--/campgrounds/:id/edit-->
-Comment Edit Route:   <!--/campgrounds/:id/comments/:comment_id/edit-->
+Comment Edit Route:   <!--/campgrounds/:id/comments/:commentId/edit-->
+Comment Put Route: <!-- /campgrounds/:id/comments/:commentId -->
 
 #Deleting Comments
 * Add Destroy route

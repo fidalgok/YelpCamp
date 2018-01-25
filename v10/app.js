@@ -50,6 +50,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use(function(req, res, next){
 	//whatever we put inside of res.locals is what's 
 	//available inside of our template
+	//req.user is coming from passport
 	res.locals.currentUser = req.user;
 	next();
 });
