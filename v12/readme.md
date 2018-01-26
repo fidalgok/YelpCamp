@@ -172,3 +172,12 @@ CREATE  campgrounds/:id/comments      		POST
 EDIT 	campgrounds/:id/comments/:id/edit  	GET
 UPDATE 	campgrounds/:id/comments/:id 		PUT
 
+
+# v12 update landing page
+* Install nodemon to help with development, it restarts the server automatically for us
+so we don't have to everytime we make a change.
+* Add slideshow to landing page with CSS
+
+## Add dynamic Pricing
+* 
+

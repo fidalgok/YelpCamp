@@ -134,8 +134,10 @@ Comment Destroy Route:    /campgrounds/:id/comments/:comment_id
 
 # Flash MEssages
 * Install connect-flash
-*
-*
+* Add flash messages to routes and middleware
+
+# Refactor Middleware and Routes
+* Fixed bug in middleware and some routes to include !campground and !comment when finding by ID
 
 
 
