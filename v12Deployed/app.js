@@ -9,7 +9,9 @@ var express = require('express'),
 	Comment = require('./models/comment'),
 	User = require('./models/user'),
 	flash = require('connect-flash'),
-	seedDB = require('./seeds');
+	seedDB = require('./seeds'),
+	PORT = process.env.PORT || 3000,
+	DATABASEURL = process.env.DATABASEURL || "mongodb:localhost/YelpCamp";
 //set up routes here
 var commentRoutes = require('./routes/comments'),
 	campgroundRoutes = require('./routes/campgrounds'),
@@ -18,7 +20,10 @@ var commentRoutes = require('./routes/comments'),
 
 //Delete all data, then seed database with new info.
 //seedDB(); // seed database
-mongoose.connect("mongodb://localhost/YelpCamp");
+//databaseurl env variable was set up to point to our local database on our local server
+//and mlabs database when using the heroku server. 
+mongoose.connect(DATABASEURL);
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
@@ -67,6 +72,6 @@ app.use(indexRoutes);
 
 //listener
 
-app.listen(3000, function(req, res){
+app.listen(PORT, function(req, res){
 	console.log('YelpCamp Server has started!');
 });
