@@ -1,0 +1,17 @@
+html, button, input, select, textarea {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+	
+}
+
+.thumbnail{
+	padding:0px;
+}
+
+.delete-form {
+	display: inline;
+}
+
+.auth-form{
+	width:30%;
+	margin:25px auto;
+}
